@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Recommendation } from '../models/recommendation.model';
+import { UserData } from '../models/userData.model';
+import { MovieService } from '../services/movie.service';
 
 @Component({
   selector: 'form-wrapper',
@@ -10,7 +12,7 @@ export class FormWrapperComponent implements OnInit {
 
   recommendationData: Recommendation = new Recommendation();
 
-  constructor() { }
+  constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
     this.handleResetEvent();
@@ -22,11 +24,10 @@ export class FormWrapperComponent implements OnInit {
     this.getRecommendation(event);
   }
 
-  getRecommendation(dataInputs: any) {
-    this.recommendationData = new Recommendation();
-    this.recommendationData.movieName = 'Test Movie Name';
-    this.recommendationData.movieYear = 2008;
-    this.recommendationData.score = .92; 
+  getRecommendation(dataInputs: UserData) {
+    this.movieService.getMovieRecommendation(dataInputs).subscribe(recommendation => {
+      this.recommendationData = recommendation;
+    });
 
     console.log(this.recommendationData);
   }
