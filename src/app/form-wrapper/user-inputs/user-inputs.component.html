@@ -1,8 +1,15 @@
-<input type='text'>
-<br>
-<input type='text'>
-<br>
-<input type='text'>
+<form [formGroup]="movieForm">
+    <label for="movieOne">Movie 1: </label> 
+    <input id="movieOne" type='text' formControlName='movieOne'>
+    <br>
+
+    <label for="movieOne">Movie 2: </label> 
+    <input id="movieTwo" type='text' formControlName='movieTwo'>
+    <br>
+
+    <label for="movieOne">Movie 3: </label> 
+    <input id="movieThree" type='text' formControlName='movieThree'>
+</form>
 
 <br>
-<button>Submit</button>
+<button (click)="submitMovieForm()">Submit</button>

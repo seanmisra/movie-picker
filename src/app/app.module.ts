@@ -7,6 +7,7 @@ import { HeaderBarComponent } from './header-bar/header-bar.component';
 import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
 import { UserInputsComponent } from './form-wrapper/user-inputs/user-inputs.component';
 import { MovieRecommendationComponent } from './form-wrapper/movie-recommendation/movie-recommendation.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { MovieRecommendationComponent } from './form-wrapper/movie-recommendatio
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
