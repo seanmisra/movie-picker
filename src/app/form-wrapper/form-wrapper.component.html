@@ -1,2 +1,13 @@
-<user-inputs></user-inputs>
-<movie-recommendation></movie-recommendation>
+<user-inputs
+    (submitEvent)="handleSubmitEvent($event)"
+    (resetEvent)="handleResetEvent()"
+>
+</user-inputs>
+
+
+
+
+<movie-recommendation
+    [recommendation]="recommendationData"
+>
+</movie-recommendation>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class UserInputsComponent implements OnInit {
 
   movieForm: FormGroup;
+
+  @Output() submitEvent = new EventEmitter<any>();
+  @Output() resetEvent = new EventEmitter<any>();
+
 
   constructor(private fb: FormBuilder) { }
 
@@ -22,7 +26,16 @@ export class UserInputsComponent implements OnInit {
   }
 
   submitMovieForm() {
-    console.log(this.movieForm.value);
+    if (this.movieForm && this.movieForm.valid) {
+      this.submitEvent.emit(this.movieForm.value);
+    }
+  }
+
+  resetMovieForm() {
+    if (this.movieForm) {
+      this.movieForm.reset();
+      this.resetEvent.emit();
+    }
   }
 
 }

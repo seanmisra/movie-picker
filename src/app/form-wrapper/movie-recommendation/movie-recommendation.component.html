@@ -1,3 +1,5 @@
-<div>
-    RECOMMENDATION HERE
+<br><br>
+<div *ngIf="recommendation && recommendation?.hasData">
+    <h3>Recommendation:</h3>
+    {{ recommendation?.movieName }} ({{ recommendation?.movieYear }})
 </div>

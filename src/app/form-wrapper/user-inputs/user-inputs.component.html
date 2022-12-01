@@ -1,6 +1,6 @@
 <form [formGroup]="movieForm">
     <label for="movieOne">Movie 1: </label> 
-    <input id="movieOne" type='text' formControlName='movieOne'>
+    <input required id="movieOne" type='text' formControlName='movieOne'>
     <br>
 
     <label for="movieOne">Movie 2: </label> 
@@ -13,3 +13,5 @@
 
 <br>
 <button (click)="submitMovieForm()">Submit</button>
+<button id="resetButton" (click)="resetMovieForm()">Reset</button>
+
