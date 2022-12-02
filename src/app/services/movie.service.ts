@@ -16,6 +16,10 @@ export class MovieService {
   constructor() { 
   }
 
+  getAllMovies(): Observable<any> {
+    return of(allMovieData.sort((a, b) => (a.movieName > b.movieName) ? 1 : -1));
+  }
+
 
   getMovieRecommendation(userData: UserData): Observable<Recommendation> {
     this.allMovieDataLocal = allMovieData;

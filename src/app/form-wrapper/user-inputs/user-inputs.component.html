@@ -1,14 +1,39 @@
 <form [formGroup]="movieForm">
-    <label for="movieOne">Movie 1: </label> 
-    <input required id="movieOne" type='text' formControlName='movieOne'>
-    <br>
+    <mat-form-field id="movie-field-one"> 
+        <mat-label>
+            Movie 1:
+        </mat-label>
+        <input [matAutocomplete]="auto" matInput id="movieOne" type="text" formControlName='movieOne' />
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let movie of filteredMovieOptions" [value]="movie['movieName']">
+                {{ movie['movieName'] }}
+            </mat-option> 
+        </mat-autocomplete>
+    </mat-form-field>
 
-    <label for="movieOne">Movie 2: </label> 
-    <input id="movieTwo" type='text' formControlName='movieTwo'>
-    <br>
+    <mat-form-field id="movie-field-two"> 
+        <mat-label>
+            Movie 2:
+        </mat-label>
+        <input [matAutocomplete]="autoTwo" matInput id="movieTwo" type="text" formControlName='movieTwo' />
+        <mat-autocomplete #autoTwo="matAutocomplete">
+            <mat-option *ngFor="let movie of filteredMovieOptionsTwo" [value]="movie['movieName']">
+                {{ movie['movieName'] }}
+            </mat-option> 
+        </mat-autocomplete>
+    </mat-form-field>
 
-    <label for="movieOne">Movie 3: </label> 
-    <input id="movieThree" type='text' formControlName='movieThree'>
+    <mat-form-field id="movie-field-three"> 
+        <mat-label>
+            Movie 3:
+        </mat-label>
+        <input [matAutocomplete]="autoThree" matInput id="movieThree" type="text" formControlName='movieThree' />
+        <mat-autocomplete #autoThree="matAutocomplete">
+            <mat-option *ngFor="let movie of filteredMovieOptionsThree" [value]="movie['movieName']">
+                {{ movie['movieName'] }}
+            </mat-option> 
+        </mat-autocomplete>
+    </mat-form-field>
 </form>
 
 <br>

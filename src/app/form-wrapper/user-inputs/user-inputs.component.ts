@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { first } from 'rxjs/internal/operators/first';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'user-inputs',
@@ -9,20 +11,74 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class UserInputsComponent implements OnInit {
 
   movieForm: FormGroup;
+  movieOptions = [];
+  filteredMovieOptions = [];
+  filteredMovieOptionsTwo = [];
+  filteredMovieOptionsThree = [];
 
   @Output() submitEvent = new EventEmitter<any>();
   @Output() resetEvent = new EventEmitter<any>();
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private movieService: MovieService) { }
 
   ngOnInit(): void {
+    this.initForm();
+    this.loadMovieOptions();
+  }
 
+  initForm() {
     this.movieForm = this.fb.group({
       movieOne: '',
       movieTwo: '',
       movieThree: ''
     });
+
+    this.movieForm.get('movieOne').valueChanges.subscribe(val => {
+      val = (val === (null || undefined)) ? '' : val;
+      this.filterData(val);
+    });
+
+    this.movieForm.get('movieTwo').valueChanges.subscribe(val => {
+      val = (val === (null || undefined)) ? '' : val;
+      this.filterDataTwo(val);
+    });
+
+    this.movieForm.get('movieThree').valueChanges.subscribe(val => {
+      val = (val === (null || undefined)) ? '' : val;
+      this.filterDataThree(val);
+    });
+  }
+
+  filterData(val: string) {
+    this.filteredMovieOptions = this.movieOptions.filter((movie:any) => {
+      return movie.movieName.toLowerCase().indexOf(val.toLowerCase()) > -1;
+    })
+
+    console.log('filteredMovieOptions');
+    console.log(this.filteredMovieOptions);
+    console.log('filteredMovieOptionsTwo');
+    console.log(this.filteredMovieOptionsTwo);
+    console.log('filteredMovieOptionsThree');
+    console.log(this.filteredMovieOptionsThree);
+  }
+
+  filterDataTwo(val: string) {
+    this.filteredMovieOptionsTwo = this.movieOptions.filter((movie:any) => {
+      return movie.movieName.toLowerCase().indexOf(val.toLowerCase()) > -1;
+    })
+  }
+
+  filterDataThree(val: string) {
+    this.filteredMovieOptionsThree = this.movieOptions.filter((movie:any) => {
+      return movie.movieName.toLowerCase().indexOf(val.toLowerCase()) > -1;
+    })
+  }
+
+  loadMovieOptions() {
+    this.movieService.getAllMovies().pipe(first()).subscribe(movieData => {
+      this.movieOptions = this.filteredMovieOptions = this.filteredMovieOptionsTwo = this.filteredMovieOptionsThree = movieData;
+    })
   }
 
   submitMovieForm() {
@@ -36,6 +92,8 @@ export class UserInputsComponent implements OnInit {
       this.movieForm.reset();
       this.resetEvent.emit();
     }
+
+    this.loadMovieOptions();
   }
 
 }
