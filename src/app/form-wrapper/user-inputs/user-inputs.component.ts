@@ -35,41 +35,40 @@ export class UserInputsComponent implements OnInit {
     });
 
     this.movieForm.get('movieOne').valueChanges.subscribe(val => {
-      val = (val === (null || undefined)) ? '' : val;
+      val = ((val === null) || (val === undefined)) ? '' : val;
       this.filterData(val);
     });
 
     this.movieForm.get('movieTwo').valueChanges.subscribe(val => {
-      val = (val === (null || undefined)) ? '' : val;
+      val = ((val === null) || (val === undefined)) ? '' : val;
       this.filterDataTwo(val);
     });
 
     this.movieForm.get('movieThree').valueChanges.subscribe(val => {
-      val = (val === (null || undefined)) ? '' : val;
+      val = ((val === null) || (val === undefined)) ? '' : val;
       this.filterDataThree(val);
     });
   }
 
   filterData(val: string) {
+    val = ((val === null) || (val === undefined)) ? '' : val;
+
     this.filteredMovieOptions = this.movieOptions.filter((movie:any) => {
       return movie.movieName.toLowerCase().indexOf(val.toLowerCase()) > -1;
     })
-
-    console.log('filteredMovieOptions');
-    console.log(this.filteredMovieOptions);
-    console.log('filteredMovieOptionsTwo');
-    console.log(this.filteredMovieOptionsTwo);
-    console.log('filteredMovieOptionsThree');
-    console.log(this.filteredMovieOptionsThree);
   }
 
   filterDataTwo(val: string) {
+    val = ((val === null) || (val === undefined)) ? '' : val;
+
     this.filteredMovieOptionsTwo = this.movieOptions.filter((movie:any) => {
       return movie.movieName.toLowerCase().indexOf(val.toLowerCase()) > -1;
     })
   }
 
   filterDataThree(val: string) {
+    val = ((val === null) || (val === undefined)) ? '' : val;
+
     this.filteredMovieOptionsThree = this.movieOptions.filter((movie:any) => {
       return movie.movieName.toLowerCase().indexOf(val.toLowerCase()) > -1;
     })

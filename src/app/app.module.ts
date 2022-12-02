@@ -11,6 +11,7 @@ import { MovieRecommendationComponent } from './form-wrapper/movie-recommendatio
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatAutocompleteModule, MatCardModule  } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule, 
     MatAutocompleteModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

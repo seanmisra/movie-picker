@@ -28,6 +28,13 @@ export class FormWrapperComponent implements OnInit {
 
   getRecommendation(dataInputs: UserData) {
     this.movieService.getMovieRecommendation(dataInputs).subscribe(recommendation => {
+
+      this.movieService.getEnrichedMovieData(recommendation.movieName).subscribe(enrichedData => {
+        console.log(enrichedData);
+      }) 
+
+
+
       this.recommendationData = recommendation;
       this.recommendationUpdateEvent.emit(this.recommendationData);
     });
