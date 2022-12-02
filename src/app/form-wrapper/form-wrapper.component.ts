@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Recommendation } from '../models/recommendation.model';
 import { UserData } from '../models/userData.model';
 import { MovieService } from '../services/movie.service';
@@ -9,6 +9,8 @@ import { MovieService } from '../services/movie.service';
   styleUrls: ['./form-wrapper.component.scss']
 })
 export class FormWrapperComponent implements OnInit {
+
+  @Output() recommendationUpdateEvent = new EventEmitter<any>();
 
   recommendationData: Recommendation = new Recommendation();
 
@@ -27,6 +29,7 @@ export class FormWrapperComponent implements OnInit {
   getRecommendation(dataInputs: UserData) {
     this.movieService.getMovieRecommendation(dataInputs).subscribe(recommendation => {
       this.recommendationData = recommendation;
+      this.recommendationUpdateEvent.emit(this.recommendationData);
     });
 
     console.log(this.recommendationData);

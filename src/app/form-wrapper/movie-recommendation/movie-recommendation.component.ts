@@ -10,6 +10,8 @@ export class MovieRecommendationComponent implements OnInit {
 
   @Input() recommendation: Recommendation;
 
+  panelOpenState = false;
+
   constructor() { }
 
   ngOnInit(): void {

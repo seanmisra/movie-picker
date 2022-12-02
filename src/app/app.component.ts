@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Recommendation } from './models/recommendation.model';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'movie-picker';
+
+  recommendationData: Recommendation = new Recommendation();
+
+
+  handleRecommendationUpdateEvent(event: any) {
+    this.recommendationData = event;
+  }
 }

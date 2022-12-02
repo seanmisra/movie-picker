@@ -9,7 +9,8 @@ import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
 import { UserInputsComponent } from './form-wrapper/user-inputs/user-inputs.component';
 import { MovieRecommendationComponent } from './form-wrapper/movie-recommendation/movie-recommendation.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatAutocompleteModule  } from '@angular/material';
+import { MatInputModule, MatAutocompleteModule, MatCardModule  } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { MatInputModule, MatAutocompleteModule  } from '@angular/material';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule, 
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

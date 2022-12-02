@@ -1,5 +1,8 @@
-<br><br>
 <div *ngIf="recommendation && recommendation.hasData">
-    <h3>Recommendation:</h3>
-    {{ recommendation.movieName }} ({{ recommendation.movieYear }})
+    <mat-card class="recommendation-wrapper">
+        <mat-card-content>
+            <mat-card-title id="recommendation-title">Recommendation:</mat-card-title>
+            <mat-card-subtitle>{{ recommendation.movieName }} ({{ recommendation.movieYear }})</mat-card-subtitle>
+        </mat-card-content>
+    </mat-card>
 </div>

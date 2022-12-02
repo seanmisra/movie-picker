@@ -1,4 +1,22 @@
-<header-bar></header-bar>
-<form-wrapper></form-wrapper>
+<div class="content-wrapper">
 
-<router-outlet></router-outlet>
+  <mat-card class="recommendation-wrapper">
+    <mat-card-content>
+      <header-bar></header-bar>
+      <form-wrapper
+        (recommendationUpdateEvent)="handleRecommendationUpdateEvent($event)"
+      >
+
+      </form-wrapper>
+    </mat-card-content>
+</mat-card>
+
+
+<movie-recommendation *ngIf="recommendationData && recommendationData.hasData"
+    [recommendation]="recommendationData"
+>
+</movie-recommendation>
+
+  
+  <router-outlet></router-outlet>
+</div>

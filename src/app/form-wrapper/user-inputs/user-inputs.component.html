@@ -3,7 +3,7 @@
         <mat-label>
             Movie 1:
         </mat-label>
-        <input [matAutocomplete]="auto" matInput id="movieOne" type="text" formControlName='movieOne' />
+        <input [required]="true" [matAutocomplete]="auto" matInput id="movieOne" type="text" formControlName='movieOne' />
         <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let movie of filteredMovieOptions" [value]="movie['movieName']">
                 {{ movie['movieName'] }}
@@ -37,6 +37,5 @@
 </form>
 
 <br>
-<button (click)="submitMovieForm()">Submit</button>
-<button id="resetButton" (click)="resetMovieForm()">Reset</button>
-
+<button class="action-button" (click)="submitMovieForm()" mat-raised-button color="primary">Submit</button>
+<button class="action-button" id="resetButton" (click)="resetMovieForm()" mat-raised-button>Reset</button>
