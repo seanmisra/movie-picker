@@ -3,6 +3,8 @@
         <mat-card-content>
             <mat-card-title id="recommendation-title">Recommendation:</mat-card-title>
             <mat-card-subtitle>{{ recommendation.movieName }} ({{ recommendation.movieYear }})</mat-card-subtitle>
+        
+            <img [src]="recommendation.imgLink">
         </mat-card-content>
     </mat-card>
 </div>

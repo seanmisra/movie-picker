@@ -3,4 +3,5 @@ export class Recommendation {
     movieName: string;
     movieYear: number;
     score?: number;
+    imgLink?: string;
 }
