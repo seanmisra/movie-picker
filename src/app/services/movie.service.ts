@@ -25,6 +25,11 @@ export class MovieService {
   getAllMovies(): Observable<any> {
     return of(allMovieData.sort((a, b) => (a.movieName > b.movieName) ? 1 : -1));
   }
+  
+  private lookupMovie(lookupMovieName: string): MovieData {
+    return this.allMovieDataLocal.find(movie => movie.movieName.toLowerCase() === lookupMovieName.toLowerCase()); 
+
+  }
 
 
   getMovieRecommendation(userData: UserData): Observable<Recommendation> {
@@ -36,7 +41,7 @@ export class MovieService {
     let movieThree: MovieData;
     let relevantKeywords: any[] = [];
     
-    movieOne = this.allMovieDataLocal.find(movie => movie.movieName.toLowerCase() === userData.movieOne.toLowerCase()); 
+    movieOne = this.lookupMovie(userData.movieOne);
     if (movieOne) {
       relevantKeywords.push(...movieOne.keywords);
       this.allMovieDataLocal = this.allMovieDataLocal.filter(movie => movie.movieName !== movieOne.movieName);      
@@ -44,14 +49,14 @@ export class MovieService {
     
     
     if (userData.movieTwo) {
-      movieTwo = this.allMovieDataLocal.find(movie => movie.movieName.toLowerCase() === userData.movieTwo.toLowerCase()); 
+      movieTwo = this.lookupMovie(userData.movieTwo);
       if (movieTwo) {
         relevantKeywords.push(...movieTwo.keywords);
         this.allMovieDataLocal = this.allMovieDataLocal.filter(movie => movie.movieName !== movieTwo.movieName);      
       }
     }
     if (userData.movieThree) {
-      movieThree = this.allMovieDataLocal.find(movie => movie.movieName.toLowerCase() === userData.movieThree.toLowerCase()); 
+      movieThree = this.lookupMovie(userData.movieThree);
       if (movieThree) {
         relevantKeywords.push(...movieThree.keywords);
         this.allMovieDataLocal = this.allMovieDataLocal.filter(movie => movie.movieName !== movieThree.movieName);      
