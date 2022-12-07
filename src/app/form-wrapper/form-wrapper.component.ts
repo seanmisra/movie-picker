@@ -33,7 +33,9 @@ export class FormWrapperComponent implements OnInit {
       this.recommendationData = recommendation;
 
       this.movieService.getEnrichedMovieData(recommendation.movieName).subscribe(enrichedData => {
-        this.recommendationData.imgLink = enrichedData.Poster;
+        this.enrichData(enrichedData);
+        console.log(this.recommendationData);
+        console.log(this.recommendationData);
         this.recommendationUpdateEvent.emit(this.recommendationData);
       })
     }, error => {
@@ -45,6 +47,20 @@ export class FormWrapperComponent implements OnInit {
           this.movieNameErrorMessage = this.cleanErrorMessage(error.error.message);
         }
     });
+  }
+
+  enrichData(enrichedData: any) {
+    this.recommendationData.imgLink = enrichedData.Poster;
+    this.recommendationData.actors = enrichedData.Actors;
+    this.recommendationData.boxOffice = enrichedData.BoxOffice;
+    this.recommendationData.director = enrichedData.Director;
+    this.recommendationData.genre = enrichedData.Genre;
+    this.recommendationData.language = enrichedData.Language;
+    this.recommendationData.plot = enrichedData.Plot;
+    this.recommendationData.rated = enrichedData.Rated;
+    this.recommendationData.ratings = enrichedData.Ratings;
+    this.recommendationData.released = enrichedData.Released;
+    this.recommendationData.runtime = enrichedData.Runtime;
   }
 
   cleanErrorMessage(errorMessage: string) {
