@@ -13,6 +13,7 @@ export class FormWrapperComponent implements OnInit {
   @Output() recommendationUpdateEvent = new EventEmitter<any>();
 
   recommendationData: Recommendation = new Recommendation();
+  movieNameErrorMessage = '';
 
   constructor(private movieService: MovieService) { }
 
@@ -28,19 +29,28 @@ export class FormWrapperComponent implements OnInit {
 
   getRecommendation(dataInputs: UserData) {
     this.movieService.getMovieRecommendation(dataInputs).subscribe(recommendation => {
-
+      this.movieNameErrorMessage = '';
       this.recommendationData = recommendation;
 
       this.movieService.getEnrichedMovieData(recommendation.movieName).subscribe(enrichedData => {
-        console.log(enrichedData);
         this.recommendationData.imgLink = enrichedData.Poster;
-        console.log('recommendationData');
-        console.log(this.recommendationData);
-
         this.recommendationUpdateEvent.emit(this.recommendationData);
-
-      }) 
+      })
+    }, error => {
+      console.log('ERROR: retrieving movie recommendation data');
+      console.log(error)
+      this.handleResetEvent();
+      if (error.error && error.error.message && error.status &&
+        error.status >= 400 && error.status <500) {
+          this.movieNameErrorMessage = this.cleanErrorMessage(error.error.message);
+        }
     });
+  }
+
+  cleanErrorMessage(errorMessage: string) {
+    errorMessage = errorMessage.replace('movieOneInput', 'Movie 1').replace('movieTwoInput', 'Movie 2').replace('movieThreeInput', 'Movie 3');
+    errorMessage += '!';
+    return errorMessage;
   }
 
   handleResetEvent() {

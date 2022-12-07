@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { first } from 'rxjs/internal/operators/first';
 import { MovieService } from 'src/app/services/movie.service';
@@ -15,10 +15,12 @@ export class UserInputsComponent implements OnInit {
   filteredMovieOptions = [];
   filteredMovieOptionsTwo = [];
   filteredMovieOptionsThree = [];
+  errorMessage = '';
 
   @Output() submitEvent = new EventEmitter<any>();
   @Output() resetEvent = new EventEmitter<any>();
 
+  @Input() movieNameErrorMessage = '';
 
   constructor(private fb: FormBuilder, private movieService: MovieService) { }
 
@@ -82,17 +84,29 @@ export class UserInputsComponent implements OnInit {
 
   submitMovieForm() {
     if (this.movieForm && this.movieForm.valid) {
+      this.errorMessage = '';
       this.submitEvent.emit(this.movieForm.value);
+    } else {
+      this.getErrorMessage();
     }
   }
 
   resetMovieForm() {
     if (this.movieForm) {
+      this.errorMessage = '';
       this.movieForm.reset();
       this.resetEvent.emit();
     }
 
     this.loadMovieOptions();
+  }
+
+  getErrorMessage() {
+    if (this.movieForm) {
+      if (this.movieForm.controls['movieOne'] &&!this.movieForm.controls['movieOne'].value) {
+        this.errorMessage = 'Movie 1 is required!';
+      }
+    }
   }
 
 }

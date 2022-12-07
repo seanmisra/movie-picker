@@ -39,3 +39,5 @@
 <br>
 <button class="action-button" (click)="submitMovieForm()" mat-raised-button color="primary">Submit</button>
 <button class="action-button" id="resetButton" (click)="resetMovieForm()" mat-raised-button>Reset</button>
+<div *ngIf="errorMessage" class="validation-error-message">{{ errorMessage }}</div>
+<div *ngIf="movieNameErrorMessage && !errorMessage" class="validation-error-message">{{ movieNameErrorMessage }}</div>
