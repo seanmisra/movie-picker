@@ -1,16 +1,62 @@
 .recommendation-wrapper {
     margin-top: 25px;
+    display: flex;
+
+    .mat-card-content {
+        display: flex;
+        width: 100%;
+
+        .recommendation-column {
+            flex-grow: 1;
+            margin: 0;
+            padding: 0;
+
+            .recommendation-details-title {
+                margin-bottom: 5px;
+            }
+
+            .recommendation-details-data {
+                color: rgba(0, 0, 0, .54);
+                display: inline;
+            }
+
+            #plot-details {
+                margin-right: 75px;
+            }
+
+            .ratings-details {
+                font-size: 16px;
+            }
+
+            .recommendation-sub-header {
+                font-weight: bold;
+                margin-top: 5px;
+            }
+        }
+        .recommendation-column-one {
+            width: 33%;
+        }
+        .recommendation-column-two {
+            width: 33%;
+        }
+        .recommendation-column-three {
+            width: 33%;
+        }
+    }
 
     #recommendation-title {
         font-size: 20px;
     }
     
     img {
-        max-height: 150px;
+        max-height: 200px;
     }
 
-    #attribution-link {
+    
+
+    #attribution-text {
         margin-top: 5px;
+        margin-bottom: 0px;
         display: block;
         font-size: 12px;
     }

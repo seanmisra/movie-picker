@@ -1,11 +1,37 @@
 <div *ngIf="recommendation && recommendation.hasData">
     <mat-card class="recommendation-wrapper">
         <mat-card-content>
-            <mat-card-title id="recommendation-title">Recommendation:</mat-card-title>
-            <mat-card-subtitle>{{ recommendation.movieName }} ({{ recommendation.movieYear }})</mat-card-subtitle>
-        
-            <img [src]="recommendation.imgLink">
-            <a id="attribution-link" target="_blank" href="https://www.omdbapi.com/">From omdbapi</a>
+            <div class="recommendation-column recommendation-column-one">
+                <mat-card-title id="recommendation-title">Recommendation:</mat-card-title>
+                <mat-card-subtitle>{{ recommendation.movieName }} ({{ recommendation.movieYear }})</mat-card-subtitle>
+            
+                <img [src]="recommendation.imgLink">
+                <p id="attribution-text" >
+                    Movie details/img from <a target="_blank" href="https://www.omdbapi.com/">omdbapi</a>
+                </p>
+            </div>
+
+
+        <div class="recommendation-column recommendation-column-two">
+            <p class="recommendation-sub-header">Details</p>
+            <div class="recommendation-details-title"> Actors: <p class="recommendation-details-data">{{ recommendation.actors }} </p></div>
+            <div class="recommendation-details-title"> Length: <p class="recommendation-details-data">{{ recommendation.runtime }} </p></div>
+            <div class="recommendation-details-title"> Rated: <p class="recommendation-details-data">{{ recommendation.rated }} </p></div>
+            <div class="recommendation-details-title"> Genre: <p class="recommendation-details-data">{{ recommendation.genre }} </p></div>
+            <div class="recommendation-details-title"> Director: <p class="recommendation-details-data">{{ recommendation.director}} </p></div>
+            <div class="recommendation-details-title"> Box Office: <p class="recommendation-details-data">{{ recommendation.boxOffice }} </p></div>
+
+            <div id="plot-details" class="recommendation-details-title"> Plot: <p class="recommendation-details-data">{{ recommendation.plot }} </p></div>
+        </div>
+        <div class="recommendation-column recommendation-column-three">
+            <p class="recommendation-sub-header">Ratings</p>
+
+            <div class="recommendation-details-title ratings-details" *ngFor="let rating of recommendation.ratings"> 
+                {{ rating?.Source }}: <p class="recommendation-details-data">{{ rating?.Value }} </p>
+            </div>
+
+    
+        </div>
         </mat-card-content>
     </mat-card>
 </div>
